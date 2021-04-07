@@ -44,12 +44,14 @@ Output:
 True*/
 
 function isPalindrome(string) {
+    let convertedStr = convertString(string);
+
     // We only want to traverse until the middle of the string when comparing characters.
-    let length = Math.floor(string.length / 2);
+    let length = Math.floor(convertedStr.length / 2);
 
     for (let i = 0; i < length; i++) {
-        let current = string[i];
-        let last = string[string.length - i - 1];
+        let current = convertedStr[i];
+        let last = convertedStr[convertedStr.length - i - 1];
 
         if (current !== last) return false;
     }
@@ -57,4 +59,13 @@ function isPalindrome(string) {
     return true;
 }
 
-console.log(isPalindrome('anna'));
+function convertString(string) {
+    // Use this function to remove anomalies from string input 
+    // (whitespace, punctuation marks, inconsistent capitalisation, etc.)
+    let convertedStr = string.toLowerCase();
+
+    return convertedStr;
+}
+
+console.log(isPalindrome('ANna'));
+console.log(isPalindrome('God saved Evas dog'));
