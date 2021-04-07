@@ -11,13 +11,14 @@ Output:
 5*/
 
 function checkNumberOfOccurrences(letter, string) {
+    const lowerLetter = letter.toLowerCase();
     const str = convertString(string);
     let total = 0;
 
     for (let i = 0; i < str.length; i++) {
         const char = str[i];
 
-        if (letter === char) {
+        if (lowerLetter === char) {
             total++;
         }
     }
