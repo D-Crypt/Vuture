@@ -16,7 +16,7 @@ function checkNumberOfOccurrences(letter, string) {
     for (let i = 0; i < string.length; i++) {
         let char = string[i];
 
-        if (letter == char) {
+        if (letter === char) {
             total++;
         }
     }
@@ -24,4 +24,37 @@ function checkNumberOfOccurrences(letter, string) {
     return total;
 }
 
-console.log(checkNumberOfOccurrences("e", "I have some cheese"));
+console.log(checkNumberOfOccurrences('e', 'I have some cheese'));
+
+/*Task 2
+
+Create a function which decides if a string is a palindrome.
+
+Examples:
+
+Input:
+
+I have some cheese
+Output:
+False
+Input:
+
+God saved Eva’s dog
+Output:
+True*/
+
+function isPalindrome(string) {
+    // We only want to traverse until the middle of the string when comparing characters.
+    let length = Math.floor(string.length / 2);
+
+    for (let i = 0; i < length; i++) {
+        let current = string[i];
+        let last = string[string.length - i - 1];
+
+        if (current !== last) return false;
+    }
+
+    return true;
+}
+
+console.log(isPalindrome('anna'));
