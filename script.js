@@ -11,10 +11,11 @@ Output:
 5*/
 
 function checkNumberOfOccurrences(letter, string) {
+    const str = convertString(string);
     let total = 0;
 
-    for (let i = 0; i < string.length; i++) {
-        let char = string[i];
+    for (let i = 0; i < str.length; i++) {
+        const char = str[i];
 
         if (letter === char) {
             total++;
@@ -22,6 +23,11 @@ function checkNumberOfOccurrences(letter, string) {
     }
 
     return total;
+}
+
+function convertString(string) {
+    // Removes all non-alphanumeric characters from the string, then converts to lowercase.
+    return str = string.replace(/\W/g, '').toLowerCase();
 }
 
 console.log(checkNumberOfOccurrences('e', 'I have some cheese'));
@@ -44,28 +50,11 @@ Output:
 True*/
 
 function isPalindrome(string) {
-    let convertedStr = convertString(string);
-
-    // We only want to traverse until the middle of the string when comparing characters.
-    let length = Math.floor(convertedStr.length / 2);
-
-    for (let i = 0; i < length; i++) {
-        let current = convertedStr[i];
-        let last = convertedStr[convertedStr.length - i - 1];
-
-        if (current !== last) return false;
-    }
-
-    return true;
+    const str = convertString(string);
+    return str === str.split('').reverse().join('');
 }
 
-function convertString(string) {
-    // Use this function to remove anomalies from string input 
-    // (whitespace, punctuation marks, inconsistent capitalisation, etc.)
-    let convertedStr = string.toLowerCase();
-
-    return convertedStr;
-}
-
-console.log(isPalindrome('ANna'));
-console.log(isPalindrome('God saved Evas dog'));
+console.log(isPalindrome('I have some cheese'));
+console.log(isPalindrome("God saved Eva's dog"));
+console.log(isPalindrome("saippuakivikauppias"));
+console.log(isPalindrome("race CAR"));
