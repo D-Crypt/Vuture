@@ -53,6 +53,9 @@ True*/
 function isPalindrome(string) {
     const str = convertString(string);
     return str === str.split('').reverse().join('');
+    /* split() splits the string into an array of substrings, with '' allowing separation by character.
+    reverse() then reverses the array in place.
+    join() converts the elements (in this case, reversed characters) of an array back into a string. */
 }
 
 console.log(isPalindrome('I have some cheese'));
