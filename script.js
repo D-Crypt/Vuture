@@ -12,7 +12,7 @@ Output:
 
 function checkNumberOfOccurrences(letter, string) {
     const lowerLetter = letter.toLowerCase();
-    const str = convertString(string);
+    const str = removePunctuation(string);
     let total = 0;
 
     for (let i = 0; i < str.length; i++) {
@@ -26,7 +26,7 @@ function checkNumberOfOccurrences(letter, string) {
     return total;
 }
 
-function convertString(string) {
+function removePunctuation(string) {
     return str = string.replace(/\W/g, '').toLowerCase();
     // Removes all non-alphanumeric characters from the string, then converts to lowercase.
 }
@@ -51,7 +51,7 @@ Output:
 True */
 
 function isPalindrome(string) {
-    const str = convertString(string);
+    const str = removePunctuation(string);
     return str === str.split('').reverse().join('');
     /* split() splits the string into an array of substrings, with '' allowing separation by character.
     reverse() then reverses the array in place.
