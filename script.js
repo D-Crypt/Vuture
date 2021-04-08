@@ -1,4 +1,4 @@
-/*Task 1
+/* Task 1
 
 Create a function which counts the number of occurrences of a given letter in a string.
 
@@ -8,7 +8,7 @@ Input:
 
 'e' and "I have some cheese"
 Output:
-5*/
+5 */
 
 function checkNumberOfOccurrences(letter, string) {
     const lowerLetter = letter.toLowerCase();
@@ -27,13 +27,13 @@ function checkNumberOfOccurrences(letter, string) {
 }
 
 function convertString(string) {
-    // Removes all non-alphanumeric characters from the string, then converts to lowercase.
     return str = string.replace(/\W/g, '').toLowerCase();
+    // Removes all non-alphanumeric characters from the string, then converts to lowercase.
 }
 
 console.log(checkNumberOfOccurrences('e', 'I have some cheese'));
 
-/*Task 2
+/* Task 2
 
 Create a function which decides if a string is a palindrome.
 
@@ -48,7 +48,7 @@ Input:
 
 God saved Eva’s dog
 Output:
-True*/
+True */
 
 function isPalindrome(string) {
     const str = convertString(string);
@@ -78,27 +78,42 @@ Output:
 cat: 1, dog: 2, large: 1, total: 4 */
 
 function checkNumberOfOccurrencesCensored(list, text) {
-    const splitText = text.split(" ");
+    const str = removePunctuationKeepWhitespace(text);
+    const splitText = str.split(" ");
     const map = convertListToMap(list);
-
-    // TODO: Remove punctuation, make lowercase, retain spaces
+    let total = 0;
 
     for (let i = 0; i < splitText.length; i++) {
         const word = splitText[i];
 
         if (map.has(word)) {
             map.set(word, (map.get(word)) + 1);
+            total++;
         }
     }
 
+    map.set("total", total);
     return map;
+}
+
+function removePunctuationKeepWhitespace(string) {
+    return str = string.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ").toLowerCase();
+    /* Removes everything except alphanumeric characters and whitespace, 
+    then collapses multiple adjacent whitespace to single spaces.
+
+    Detailed explanation:
+
+    1. \w is any digit, letter, or underscore.
+    2. \s is any whitespace.
+    3. [^\w\s] is anything that's not a digit, letter, whitespace, or underscore.
+    4. [^\w\s]|_ is the same as #3 except with the underscores added back in. */
 }
 
 function convertListToMap(list) {
     const map = new Map();
 
     for (let i = 0; i < list.length; i++) {
-        const word = list[i];
+        const word = list[i].toLowerCase();
         map.set(word, 0);
     }
 
