@@ -85,11 +85,14 @@ function checkNumberOfOccurrencesCensored(list, text) {
 
     for (let i = 0; i < splitText.length; i++) {
         const word = splitText[i];
-        //const censoredWord = list[i];
 
-        if (map.has(word)) {
-            map.set(word, (map.get(word)) + 1);
-            total++;
+        for (let j = 0; j < list.length; j++) {
+            const censoredWord = list[j];
+
+            if (word.includes(censoredWord)) {
+                map.set(censoredWord, (map.get(censoredWord)) + 1);
+                total++;
+            }
         }
     }
 
