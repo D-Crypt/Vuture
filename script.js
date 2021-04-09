@@ -78,16 +78,17 @@ Output:
 cat: 1, dog: 2, large: 1, total: 4 */
 
 function checkNumberOfOccurrencesCensored(list, text) {
-    const str = removePunctuationKeepWhitespace(text);
-    const splitText = str.split(" ");
+    //const str = removePunctuationKeepWhitespace(text);
+    //const splitText = str.split(" ");
     const map = convertListToMap(list);
     let total = 0;
 
-    for (let i = 0; i < splitText.length; i++) {
-        const word = splitText[i];
+    for (let i = 0; i < list.length; i++) {
+        //const word = splitText[i];
+        const censoredWord = list[i];
 
-        if (map.has(word)) {
-            map.set(word, (map.get(word)) + 1);
+        if (text.includes(censoredWord)) {
+            map.set(censoredWord, (map.get(censoredWord)) + 1);
             total++;
         }
     }
