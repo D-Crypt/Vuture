@@ -83,11 +83,11 @@ function checkNumberOfOccurrencesCensored(list, text) {
     const map = convertListToMap(list);
     let total = 0;
 
-    for (let i = 0; i < splitText.length; i++) {
-        const word = splitText[i];
+    for (let i = 0; i < list.length; i++) {
+        const censoredWord = list[i];
 
-        for (let j = 0; j < list.length; j++) {
-            const censoredWord = list[j];
+        for (let j = 0; j < splitText.length; j++) {
+            const word = splitText[j];
 
             if (word.includes(censoredWord)) {
                 map.set(censoredWord, (map.get(censoredWord)) + 1);
@@ -98,6 +98,9 @@ function checkNumberOfOccurrencesCensored(list, text) {
 
     map.set("total", total);
     return map;
+
+    // Not happy with nested loop method for efficiency and performance.
+    // Can do one parsing if looking for exact matches, but not sure how to use a map's key as a substring for includes().
 }
 
 function removePunctuationKeepWhitespace(string) {
