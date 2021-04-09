@@ -148,13 +148,16 @@ Output:
 
 function censorWordsInText(list, text) {
     let str = text;
-    const lowerText = text.toLowerCase();
+    const splitText = text.split(" ");
+    const regex = new RegExp(list.join("|"), "i");
+    console.log(regex);
 
-    for (let i = 0; i < list.length; i++) {
-        const word = list[i];
+    for (let i = 0; i < splitText.length; i++) {
+        const word = splitText[i];
         const censoredWord = censorWord(word);
+        const isAvailable = regex.test(word);
 
-        if (str.includes(word)) {
+        if (isAvailable) {
             str = str.replaceAll(word, censoredWord);
         }
     }
@@ -169,7 +172,7 @@ function censorWord(word) {
         censoredWord = replaceAt(censoredWord, i, "*");
 
         /* JavaScript bug: If "$" is used as the censor symbol, the censorWordsInText function works incorrectly:
-        For example, "Meow" should output "M**w", but as soon as the function reaches str.replaceAll(), 
+        For example, "Meow" should output "M$$w", but as soon as the function reaches str.replaceAll(), 
         the censored word somehow outputs as "M$w". Larger words are also missing more $ symbols, the amount of which 
         seem to correlate to half of the length of the word excluding the first and last characters, i.e. "larger" becomes "l$$r" 
         and "Testing" becomes "T$$$g". The censored word itself has the correct number of $'s (as verified by console.log()), 
@@ -183,5 +186,5 @@ function replaceAt(str, index, char) {
     return str.substring(0, index) + char + str.substring(index + 1);
 }
 
-const censoredList = ["Meow", "Woof", "larger", "horse", "dog", "Testing"];
+const censoredList = ["meow", "woof", "larger", "horse", "dog"];
 console.log(censorWordsInText(censoredList, text));
