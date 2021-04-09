@@ -170,10 +170,10 @@ function censorWord(word) {
 
         /* JavaScript bug: If "$" is used as the censor symbol, the censorWordsInText function works incorrectly:
         For example, "Meow" should output "M**w", but as soon as the function reaches str.replaceAll(), 
-        the censored word somehow outputs as "M$w". Larger words are also missing $ symbols that seem to correlate to
-        less than half of the length of the word, i.e. "larger" becomes "l$$r" and "Testing" becomes "T$$$g".
-        The censored word itself has the correct number of $ (as verified by console.log()); the error only occurs when calling
-        replace() and replaceAll(). */
+        the censored word somehow outputs as "M$w". Larger words are also missing more $ symbols, the amount of which 
+        seem to correlate to half of the length of the word excluding the first and last characters, i.e. "larger" becomes "l$$r" 
+        and "Testing" becomes "T$$$g". The censored word itself has the correct number of $'s (as verified by console.log()), 
+        proving that the error only occurs when calling replace() and replaceAll(). */
     }
 
     return censoredWord;
