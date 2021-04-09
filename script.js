@@ -78,8 +78,8 @@ Output:
 cat: 1, dog: 2, large: 1, total: 4 */
 
 function checkNumberOfOccurrencesCensored(list, text) {
-    str = removePunctuationKeepWhitespace(text);
-    splitText = str.split(" ");
+    const str = removePunctuationKeepWhitespace(text);
+    const splitText = str.split(" ");
     const map = convertListToMap(list);
     let total = 0;
 
