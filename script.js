@@ -99,8 +99,10 @@ function checkNumberOfOccurrencesCensored(list, text) {
     map.set("total", total);
     return map;
 
-    // Not happy with nested loop method for efficiency and performance.
-    // Can do one parsing if looking for exact matches, but not sure how to use a map's key as a substring for includes().
+    /* Not happy with nested loop method for efficiency and performance.
+       Can do one parse if looking for exact matches using map.has(), 
+       but not sure how to use a map's key as a substring for includes(),
+       e.g. seeing if "larger" contains "large" without further iteration. */
 }
 
 function removePunctuationKeepWhitespace(string) {
@@ -131,3 +133,33 @@ const list = ["dog", "cat", "large"];
 const text = "I have a cat named Meow and a dog name Woof. I love the dog a lot. He is larger than a small horse."
 
 console.log(checkNumberOfOccurrencesCensored(list, text));
+
+/* Part B)
+
+Create a way to censor words featured in the "censored words list" that appear in the text.
+
+Example:
+
+Input:
+
+{"meow", "woof"} and "I have a cat named Meow and a dog name Woof. I love the dog a lot. He is larger than a small horse."
+Output:
+"I have a cat named M$$w and a dog name W$$f. I love the dog a lot. He is larger than a small horse." */
+
+function censorWords(list, text) {
+    let str = text;
+    const lowerText = text.toLowerCase();
+
+    for (let i = 0; i < list.length; i++) {
+        const word = list[i];
+
+        if (lowerText.includes(word.toLowerCase())) {
+            str = str.replace(word, "TEST");
+        }
+    }
+
+    return str;
+}
+
+const censoredList = ["Meow", "Woof"];
+console.log(censorWords(censoredList, text));
