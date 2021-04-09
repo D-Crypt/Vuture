@@ -130,7 +130,7 @@ function convertListToMap(list) {
 }
 
 const list = ["dog", "cat", "large"];
-const text = "I have a cat named Meow and a dog name Woof. I love the dog a lot. He is larger than a small horse. Testing"
+const text = "I have a cat named Meow and a dog name Woof. I love the dog a lot. He is larger than a small horse."
 
 console.log(checkNumberOfOccurrencesCensored(list, text));
 
@@ -150,14 +150,13 @@ function censorWordsInText(list, text) {
     let str = text;
     const splitText = text.split(" ");
     const regex = new RegExp(list.join("|"), "i");
-    console.log(regex);
 
     for (let i = 0; i < splitText.length; i++) {
         const word = splitText[i];
-        const censoredWord = censorWord(word);
-        const isAvailable = regex.test(word);
+        const wordIsOnCensorList = regex.test(word);
 
-        if (isAvailable) {
+        if (wordIsOnCensorList) {
+            const censoredWord = censorWord(word);
             str = str.replaceAll(word, censoredWord);
         }
     }
