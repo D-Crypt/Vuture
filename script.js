@@ -166,13 +166,15 @@ function censorWord(word) {
 
     for (let i = 1; i < word.length - 1; i++) {
         const char = word[i];
-
-        censoredWord = censoredWord.replace(char, "$");
+        censoredWord = replaceAt(censoredWord, i, "$");
     }
 
     return censoredWord;
 }
 
-const censoredList = ["Meow", "Woof", "larger"];
+function replaceAt(str, index, char) {
+    return str.substring(0, index) + char + str.substring(index + 1);
+}
+
+const censoredList = ["Meow", "Woof", "larger", "horse"];
 console.log(censorWords(censoredList, text));
-console.log(censorWord("larger"));
