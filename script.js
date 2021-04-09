@@ -154,12 +154,25 @@ function censorWords(list, text) {
         const word = list[i];
 
         if (lowerText.includes(word.toLowerCase())) {
-            str = str.replace(word, "TEST");
+            str = str.replace(word, censorWord(word));
         }
     }
 
     return str;
 }
 
-const censoredList = ["Meow", "Woof"];
+function censorWord(word) {
+    let censoredWord = word;
+
+    for (let i = 1; i < word.length - 1; i++) {
+        const char = word[i];
+
+        censoredWord = censoredWord.replace(char, "$");
+    }
+
+    return censoredWord;
+}
+
+const censoredList = ["Meow", "Woof", "larger"];
 console.log(censorWords(censoredList, text));
+console.log(censorWord("larger"));
