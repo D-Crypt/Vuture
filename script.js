@@ -130,7 +130,7 @@ function convertListToMap(list) {
 }
 
 const list = ["dog", "cat", "large"];
-const text = "I have a cat named Meow and a dog name Woof. I love the dog a lot. He is larger than a small horse."
+const text = "I have a cat named Meow and a dog name Woof. I love the dog a lot. He is larger than a small horse. Testing"
 
 console.log(checkNumberOfOccurrencesCensored(list, text));
 
@@ -146,15 +146,16 @@ Input:
 Output:
 "I have a cat named M$$w and a dog name W$$f. I love the dog a lot. He is larger than a small horse." */
 
-function censorWords(list, text) {
+function censorWordsInText(list, text) {
     let str = text;
     const lowerText = text.toLowerCase();
 
     for (let i = 0; i < list.length; i++) {
         const word = list[i];
+        const censoredWord = censorWord(word);
 
-        if (lowerText.includes(word.toLowerCase())) {
-            str = str.replace(word, censorWord(word));
+        if (str.includes(word)) {
+            str = str.replaceAll(word, censoredWord);
         }
     }
 
@@ -165,8 +166,14 @@ function censorWord(word) {
     let censoredWord = word;
 
     for (let i = 1; i < word.length - 1; i++) {
-        const char = word[i];
-        censoredWord = replaceAt(censoredWord, i, "$");
+        censoredWord = replaceAt(censoredWord, i, "*");
+
+        /* JavaScript bug: If "$" is used as the censor symbol, the censorWordsInText function works incorrectly:
+        For example, "Meow" should output "M**w", but as soon as the function reaches str.replaceAll(), 
+        the censored word somehow outputs as "M$w". Larger words are also missing $ symbols that seem to correlate to
+        less than half of the length of the word, i.e. "larger" becomes "l$$r" and "Testing" becomes "T$$$g".
+        The censored word itself has the correct number of $ (as verified by console.log()); the error only occurs when calling
+        replace() and replaceAll(). */
     }
 
     return censoredWord;
@@ -176,5 +183,5 @@ function replaceAt(str, index, char) {
     return str.substring(0, index) + char + str.substring(index + 1);
 }
 
-const censoredList = ["Meow", "Woof", "larger", "horse"];
-console.log(censorWords(censoredList, text));
+const censoredList = ["Meow", "Woof", "larger", "horse", "dog", "Testing"];
+console.log(censorWordsInText(censoredList, text));
