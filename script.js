@@ -1,15 +1,3 @@
-/* Task 1
-
-Create a function which counts the number of occurrences of a given letter in a string.
-
-Example:
-
-Input:
-
-'e' and "I have some cheese"
-Output:
-5 */
-
 function checkNumberOfOccurrences(letter, string) {
     const lowerLetter = letter.toLowerCase();
     const str = removePunctuationMakeLowerCase(string);
@@ -31,25 +19,6 @@ function removePunctuationMakeLowerCase(string) {
     // Removes all non-alphanumeric characters from the string, then converts to lowercase.
 }
 
-console.log(checkNumberOfOccurrences('e', 'I have some cheese'));
-
-/* Task 2
-
-Create a function which decides if a string is a palindrome.
-
-Examples:
-
-Input:
-
-I have some cheese
-Output:
-False
-Input:
-
-God saved Eva’s dog
-Output:
-True */
-
 function isPalindrome(string) {
     const str = removePunctuationMakeLowerCase(string);
     return str === str.split('').reverse().join('');
@@ -57,25 +26,6 @@ function isPalindrome(string) {
     reverse() then reverses the array in place.
     join() converts the elements (in this case, reversed characters) of an array back into a string. */
 }
-
-console.log(isPalindrome('I have some cheese'));
-console.log(isPalindrome("God saved Eva's dog"));
-console.log(isPalindrome("saippuakivikauppias"));
-console.log(isPalindrome("race CAR"));
-
-/* Task 3
-
-Part A)
-
-Create a function which counts the number of occurrences of words from a "censored words list" in a text.
-
-Example:
-
-Input:
-
-{"dog", "cat", "large"} and "I have a cat named Meow and a dog name Woof. I love the dog a lot. He is larger than a small horse."
-Output:
-cat: 1, dog: 2, large: 1, total: 4 */
 
 function checkNumberOfOccurrencesCensored(list, text) {
     const str = text;
@@ -148,7 +98,7 @@ Output:
 
 function censorWordsInText(list, text) {
     let str = text;
-    const splitText = text.split(" ");
+    const splitText = removePunctuationKeepWhitespace(text).split(" ");
     const regex = new RegExp(list.join("|"), "i");
 
     for (let i = 0; i < splitText.length; i++) {
@@ -170,12 +120,12 @@ function censorWord(word) {
     for (let i = 1; i < word.length - 1; i++) {
         censoredWord = replaceAt(censoredWord, i, "*");
 
-        /* JavaScript bug: If "$" is used as the censor symbol, the censorWordsInText function works incorrectly:
+        /* JavaScript quirk: If "$" is used as the censor symbol, the censorWordsInText function works incorrectly:
         For example, "Meow" should output "M$$w", but as soon as the function reaches str.replaceAll(), 
         the censored word somehow outputs as "M$w". Larger words are also missing more $ symbols, the amount of which 
         seem to correlate to half of the length of the word excluding the first and last characters, i.e. "larger" becomes "l$$r" 
         and "Testing" becomes "T$$$g". The censored word itself has the correct number of $'s (as verified by console.log()), 
-        proving that the error only occurs when calling replace() and replaceAll(). */
+        proving that the error only occurs when calling replace() and replaceAll() due to $ being a special character. */
     }
 
     return censoredWord;
@@ -219,4 +169,10 @@ function censorPalindromes(text) {
 const palindromeText = "Anna went to vote in the election to fulfil her civic duty.";
 console.log(censorPalindromes(palindromeText));
 
-module.exports = checkNumberOfOccurrences;
+module.exports = {
+    checkNumberOfOccurrences,
+    removePunctuationMakeLowerCase,
+    isPalindrome,
+    checkNumberOfOccurrencesCensored,
+    convertListToMap
+}
