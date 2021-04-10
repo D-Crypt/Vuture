@@ -218,3 +218,5 @@ function censorPalindromes(text) {
 
 const palindromeText = "Anna went to vote in the election to fulfil her civic duty.";
 console.log(censorPalindromes(palindromeText));
+
+module.exports = checkNumberOfOccurrences;
