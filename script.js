@@ -12,7 +12,7 @@ Output:
 
 function checkNumberOfOccurrences(letter, string) {
     const lowerLetter = letter.toLowerCase();
-    const str = removePunctuation(string);
+    const str = removePunctuationMakeLowerCase(string);
     let total = 0;
 
     for (let i = 0; i < str.length; i++) {
@@ -26,7 +26,7 @@ function checkNumberOfOccurrences(letter, string) {
     return total;
 }
 
-function removePunctuation(string) {
+function removePunctuationMakeLowerCase(string) {
     return str = string.replace(/\W/g, '').toLowerCase();
     // Removes all non-alphanumeric characters from the string, then converts to lowercase.
 }
@@ -51,7 +51,7 @@ Output:
 True */
 
 function isPalindrome(string) {
-    const str = removePunctuation(string);
+    const str = removePunctuationMakeLowerCase(string);
     return str === str.split('').reverse().join('');
     /* split() splits the string into an array of substrings, with '' allowing separation by character.
     reverse() then reverses the array in place.
@@ -78,7 +78,7 @@ Output:
 cat: 1, dog: 2, large: 1, total: 4 */
 
 function checkNumberOfOccurrencesCensored(list, text) {
-    const str = removePunctuationKeepWhitespace(text);
+    const str = text;
     const splitText = str.split(" ");
     const map = convertListToMap(list);
     let total = 0;
@@ -187,3 +187,34 @@ function replaceAt(str, index, char) {
 
 const censoredList = ["meow", "woof", "larger", "horse", "dog"];
 console.log(censorWordsInText(censoredList, text));
+
+/* Part C)
+
+Create a way to censor a single word palindrome in a text.
+
+Example:
+
+Input:
+
+"Anna went to vote in the election to fulfil her civic duty"
+Output:
+"A$$a went to vote in the election to fulfil her c$$$c duty" */
+
+function censorPalindromes(text) {
+    let str = text;
+    const splitText = text.split(" ");
+
+    for (let i = 0; i < splitText.length; i++) {
+        const word = splitText[i];
+
+        if (isPalindrome(word)) {
+            const censoredWord = censorWord(word);
+            str = str.replaceAll(word, censoredWord);
+        }
+    }
+
+    return str;
+}
+
+const palindromeText = "Anna went to vote in the election to fulfil her civic duty.";
+console.log(censorPalindromes(palindromeText));
