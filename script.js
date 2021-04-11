@@ -56,7 +56,7 @@ function checkNumberOfOccurrencesCensored(list, text) {
 }
 
 function removePunctuationKeepWhitespace(string) {
-    return str = string.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ").toLowerCase();
+    return str = string.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
     /* Removes everything except alphanumeric characters and whitespace, 
     then collapses multiple adjacent whitespace to single spaces.
 
@@ -83,18 +83,6 @@ const list = ["dog", "cat", "large"];
 const text = "I have a cat named Meow and a dog name Woof. I love the dog a lot. He is larger than a small horse."
 
 console.log(checkNumberOfOccurrencesCensored(list, text));
-
-/* Part B)
-
-Create a way to censor words featured in the "censored words list" that appear in the text.
-
-Example:
-
-Input:
-
-{"meow", "woof"} and "I have a cat named Meow and a dog name Woof. I love the dog a lot. He is larger than a small horse."
-Output:
-"I have a cat named M$$w and a dog name W$$f. I love the dog a lot. He is larger than a small horse." */
 
 function censorWordsInText(list, text) {
     let str = text;
@@ -138,18 +126,6 @@ function replaceAt(str, index, char) {
 const censoredList = ["meow", "woof", "larger", "horse", "dog"];
 console.log(censorWordsInText(censoredList, text));
 
-/* Part C)
-
-Create a way to censor a single word palindrome in a text.
-
-Example:
-
-Input:
-
-"Anna went to vote in the election to fulfil her civic duty"
-Output:
-"A$$a went to vote in the election to fulfil her c$$$c duty" */
-
 function censorPalindromes(text) {
     let str = text;
     const splitText = text.split(" ");
@@ -174,5 +150,9 @@ module.exports = {
     removePunctuationMakeLowerCase,
     isPalindrome,
     checkNumberOfOccurrencesCensored,
-    convertListToMap
+    convertListToMap,
+    censorWordsInText,
+    censorWord,
+    replaceAt,
+    censorPalindromes
 }
