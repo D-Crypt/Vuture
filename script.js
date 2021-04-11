@@ -1,3 +1,37 @@
+/* Modify each variable as necessary to test different inputs for each task.
+   Open index.html (Live Server VSCode plugin recommended for auto-refresh) to verify outputs within the console.*/
+
+// Task 1:
+const task1Letter = "e";
+const task1Text = "I have some cheese";
+console.log("Task 1 input: '" + task1Letter + "' and '" + task1Text + "'");
+console.log("Task 1 output: Number of letter occurrences = " + checkNumberOfOccurrences(task1Letter, task1Text))
+
+// Task 2:
+const task2Text1 = "I have some cheese";
+const task2Text2 = "God saved Eva's dog";
+console.log("Task 2 input: '" + task2Text1 + "'");
+console.log("Task 2 output: isPalindrome = " + isPalindrome(task2Text1))
+console.log("Task 2 input: '" + task2Text2 + "'");
+console.log("Task 2 output: isPalindrome = " + isPalindrome(task2Text2))
+
+// Task 3A:
+const list = ["dog", "cat", "large"];
+const text = "I have a cat named Meow and a dog name Woof. I love the dog a lot. He is larger than a small horse."
+console.log("Task 3A input: '" + list +  "' and '" + text + "'");
+console.log("Task 3A output (returned map below): ")
+console.log(checkNumberOfOccurrencesCensored(list, text));
+
+// Task 3B:
+const censoredList = ["meow", "woof"];
+console.log("Task 3B input: '" + censoredList + "'");
+console.log("Task 3B output: " + censorWordsInText(censoredList, text))
+
+// Task 3C:
+const palindromeText = "Anna went to vote in the election to fulfil her civic duty.";
+console.log("Task 3C input: '" + palindromeText + "'");
+console.log("Task 3C output: '" + censorPalindromes(palindromeText))
+
 function checkNumberOfOccurrences(letter, string) {
     const lowerLetter = letter.toLowerCase();
     const str = removePunctuationMakeLowerCase(string);
@@ -79,11 +113,6 @@ function convertListToMap(list) {
     return map;
 }
 
-const list = ["dog", "cat", "large"];
-const text = "I have a cat named Meow and a dog name Woof. I love the dog a lot. He is larger than a small horse."
-
-console.log(checkNumberOfOccurrencesCensored(list, text));
-
 function censorWordsInText(list, text) {
     let str = text;
     const splitText = removePunctuationKeepWhitespace(text).split(" ");
@@ -123,9 +152,6 @@ function replaceAt(str, index, char) {
     return str.substring(0, index) + char + str.substring(index + 1);
 }
 
-const censoredList = ["meow", "woof", "larger", "horse", "dog"];
-console.log(censorWordsInText(censoredList, text));
-
 function censorPalindromes(text) {
     let str = text;
     const splitText = text.split(" ");
@@ -141,9 +167,6 @@ function censorPalindromes(text) {
 
     return str;
 }
-
-const palindromeText = "Anna went to vote in the election to fulfil her civic duty.";
-console.log(censorPalindromes(palindromeText));
 
 module.exports = {
     checkNumberOfOccurrences,
